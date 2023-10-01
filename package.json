@@ -29,6 +29,8 @@
     "packages/*"
   ],
   "dependencies": {
+    "@pulumi/azuredevops": "^2.13.0",
+    "@pulumi/pulumi": "^3.86.0",
     "tslib": "^2.3.0"
   },
   "nx": {
