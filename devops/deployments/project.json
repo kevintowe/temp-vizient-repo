@@ -1,0 +1,48 @@
+{
+  "name": "deployments",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "devops/deployments/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/devops/deployments",
+        "tsConfig": "devops/deployments/tsconfig.lib.json",
+        "packageJson": "devops/deployments/package.json",
+        "main": "devops/deployments/src/index.ts",
+        "assets": ["devops/deployments/*.md"]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs deployments {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "devops/deployments/**/*.ts",
+          "devops/deployments/package.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "devops/deployments/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}
