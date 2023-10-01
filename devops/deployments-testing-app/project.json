@@ -1,0 +1,82 @@
+{
+  "name": "deployments-testing-app",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "devops/deployments-testing-app/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/devops/deployments-testing-app",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "devops/deployments-testing-app/src/main.ts",
+        "tsConfig": "devops/deployments-testing-app/tsconfig.app.json",
+        "assets": ["devops/deployments-testing-app/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "generateLockfile": true,
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "deployments-testing-app:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "deployments-testing-app:build:development"
+        },
+        "production": {
+          "buildTarget": "deployments-testing-app:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["devops/deployments-testing-app/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "devops/deployments-testing-app/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f devops/deployments-testing-app/Dockerfile . -t deployments-testing-app"
+    }
+  },
+  "tags": []
+}
