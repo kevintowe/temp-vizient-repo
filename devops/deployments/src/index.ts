@@ -1,11 +1,4 @@
-export { initDeployments } from './lib/init';
-
-// ADO Deployments
-export { buildAppServiceDeployment } from './lib/app-service';
-export { buildFunctionAppDeployment } from './lib/function-app';
-export { buildStaticSiteDeployment } from './lib/static-site';
-
-// GitHub Deployments
+export { configureDeployments } from './lib/configure-deployments';
 
 /**
  * We need to think with a pulumi minset as we build this library. Each build function will extend

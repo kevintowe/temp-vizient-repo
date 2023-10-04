@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "preview": "pulumi --cwd ./dist/devops/deployments-testing-app preview",
-    "up": "pulumi --cwd ./dist/devops/deployments-testing-app up"
+    "nx": "nx",
+    "preview": "nx build deployments && nx build deployments-testing-app && pulumi --cwd ./dist/devops/deployments-testing-app preview --stack dev",
+    "up": "nx build deployments && nx build deployments-testing-app && pulumi --cwd ./dist/devops/deployments-testing-app up --stack dev",
+    "destroy": "nx build deployments && nx build deployments-testing-app && pulumi --cwd ./dist/devops/deployments-testing-app destroy --stack dev"
   },
   "private": true,
   "devDependencies": {

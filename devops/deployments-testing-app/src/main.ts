@@ -1,3 +1,9 @@
-import {initDeployments} from '@vizientinc/deployments'
+import { configureDeployments } from '@vizientinc/deployments';
 
-initDeployments({projectName: 'testingTeam123'})
+configureDeployments({
+  projectName: 'testingTeam123',
+  fnApps: [],
+  appServices: [],
+  staticSites: [],
+  generateOneDeployToRuleThemAll: false,
+});
