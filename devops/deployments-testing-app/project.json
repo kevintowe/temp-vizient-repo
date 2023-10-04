@@ -15,7 +15,7 @@
         "bundle": false,
         "main": "devops/deployments-testing-app/src/main.ts",
         "tsConfig": "devops/deployments-testing-app/tsconfig.app.json",
-        "assets": ["devops/deployments-testing-app/src/assets"],
+        "assets": ["devops/deployments-testing-app/src/assets", "devops/deployments-testing-app/Pulumi.yaml"],
         "generatePackageJson": true,
         "esbuildOptions": {
           "sourcemap": true,

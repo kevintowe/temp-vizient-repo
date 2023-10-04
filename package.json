@@ -2,7 +2,10 @@
   "name": "vizient",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "preview": "pulumi --cwd ./dist/devops/deployments-testing-app preview",
+    "up": "pulumi --cwd ./dist/devops/deployments-testing-app up"
+  },
   "private": true,
   "devDependencies": {
     "@nx/esbuild": "16.9.1",

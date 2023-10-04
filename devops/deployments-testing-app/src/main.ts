@@ -1,1 +1,3 @@
-console.log('Hello World');
+import {initDeployments} from '@vizientinc/deployments'
+
+initDeployments({projectName: 'testingTeam123'})
